@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "HNSPG93FFK.com.alpha.companion",
+        "paths": ["/connect/*"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opening Alpha...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      background: #0f1117;
+      color: #e8e9ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .container { max-width: 360px; padding: 20px; }
+    h1 { font-size: 22px; margin-bottom: 12px; }
+    p { color: #8b8d97; font-size: 15px; line-height: 1.5; margin-bottom: 20px; }
+    a {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #4f8cff;
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    a:hover { background: #3d7aee; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Opening Alpha...</h1>
+    <p>If the app didn't open, you may need to install it first.</p>
+    <a id="landing-link" href="#">Go to install page</a>
+  </div>
+  <script>
+    (function () {
+      // This page lives on open.askalpha.co — the universal link domain.
+      // If iOS opened the app via universal link, the user never sees this page.
+      // If the app isn't installed, iOS falls back to this HTML.
+      // Redirect to the real landing page on askalpha.co.
+      var path = window.location.pathname;
+      var parts = path.split('/').filter(Boolean);
+      var connectIdx = parts.indexOf('connect');
+      var token = (connectIdx >= 0 && parts[connectIdx + 1]) ? parts[connectIdx + 1] : null;
+
+      var landingURL = 'https://askalpha.co/connect/';
+      if (token) {
+        landingURL += encodeURIComponent(token);
+      }
+
+      document.getElementById('landing-link').href = landingURL;
+
+      // Auto-redirect after brief pause so the user sees something
+      setTimeout(function () {
+        window.location.href = landingURL;
+      }, 1500);
+    })();
+  </script>
+</body>
+</html>
